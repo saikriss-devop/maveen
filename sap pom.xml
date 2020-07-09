@@ -1,0 +1,41 @@
+Now that we have a working buildfile, we could do some enhancements: many times you are referencing the same directories, main-class and jar-name are hardcoded, and while invoking you have to remember the right order of build steps.
+
+The first and second point would be addressed with properties, the third with a special property—an attribute of the <project> tag and the fourth problem can be solved using dependencies.
+
+<groupId>org.apache.tomcat</groupId>
+
+    <artifactId>tomcat-aggregator</artifactId>
+
+    <version>3.0-SNAPSHOT</version>
+
+  </parent>
+
+  <artifactId>git</artifactId>
+
+  <packaging>pom</packaging>
+  
+      <groupId>org.apache.maven.aggregator</groupId>
+
+    <artifactId>maven-source</artifactId>
+
+    <version>2.0-SNAPSHOT</version>
+
+  </parent>
+
+  <artifactId>git</artifactId>
+
+  <packaging>pom</packaging>
+  
+      <groupId>org/repos/asf/maven-sources</groupId>
+
+    <artifactId>ant-aggregator</artifactId>
+
+    <version>3.0-SNAPSHOT</version>
+
+  </parent>
+
+  <artifactId>svn</artifactId>
+
+  <packaging>pom</packaging>
+  
+    <module>../../git/resources</module>
