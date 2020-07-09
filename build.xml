@@ -1,0 +1,27 @@
+Now that we have a working buildfile, we could do some enhancements: many times you are referencing the same directories, main-class and jar-name are hardcoded, and while invoking you have to remember the right order of build steps.
+
+The first and second point would be addressed with properties, the third with a special property—an attribute of the <project> tag and the fourth problem can be solved using dependencies.
+ <project>
+
+    <target name="clean"> 
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes"/>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/HelloWorld.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="oata.HelloWorld"/>
+            </manifest>
+        </jar>
+    </target>
+    <target name="run">
+        <java jar="build/jar/HelloWorld.jar" fork="true"/>
+    </target>
+
+</project>
